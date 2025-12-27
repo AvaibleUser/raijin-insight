@@ -36,4 +36,11 @@ public class Date {
         this.month = date.getMonthValue();
         this.year = date.getYear();
     }
+
+    public static Date from(LocalDate date) {
+        Date createdDate = new Date();
+        createdDate.date = date;
+        createdDate.fillData();
+        return createdDate;
+    }
 }

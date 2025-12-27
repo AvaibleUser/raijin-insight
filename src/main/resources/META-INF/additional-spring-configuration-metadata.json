@@ -70,6 +70,16 @@
       "name": "kafka.topics.member-commands.properties",
       "type": "java.lang.String",
       "description": "The properties to use in the Kafka consumer"
+    },
+    {
+      "name": "kafka.topics.contract-commands.topic",
+      "type": "java.lang.String",
+      "description": "The name of the Kafka topic"
+    },
+    {
+      "name": "kafka.topics.contract-commands.properties",
+      "type": "java.lang.String",
+      "description": "The properties to use in the Kafka consumer"
     }
   ]
 }

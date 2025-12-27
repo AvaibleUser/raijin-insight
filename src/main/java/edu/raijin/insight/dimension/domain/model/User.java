@@ -54,7 +54,11 @@ public class User {
         this.email = firstNonNull(updated.getEmail(), this.getEmail());
         this.role = firstNonNull(updated.getRole(), this.getRole());
         this.active = firstNonNull(updated.getActive(), this.getActive());
-        this.hiredAt = firstNonNull(updated.getHiredAt(), this.getHiredAt());
-        this.terminatedAt = firstNonNull(updated.getTerminatedAt(), this.getTerminatedAt());
+        if (hiredAt == null && role.equals("USER") && !role.equals(updated.getRole())) {
+            hiredAt = Instant.now();
+        }
+        if (terminatedAt == null && updated.getRole().equals("USER") && !role.equals(updated.getRole())) {
+            terminatedAt = Instant.now();
+        }
     }
 }

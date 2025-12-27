@@ -89,3 +89,10 @@ kafka:
         spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.identity.UserEvent,\
         enable.auto.commit=false\
         auto.offset.reset=earliest
+
+    contract-commands:
+      topic: contract-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.ContractEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest

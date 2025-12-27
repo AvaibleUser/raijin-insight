@@ -44,13 +44,3 @@ public class SprintsEntity {
     @UpdateTimestamp
     private Instant updatedAt;
 }
-
-// CREATE TABLE
-// dim.sprints (
-// sprint_id UUID PRIMARY KEY,
-// name VARCHAR(100),
-// status dim.sprint_status,
-// start_date DATE,
-// end_date DATE,
-// updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-// );

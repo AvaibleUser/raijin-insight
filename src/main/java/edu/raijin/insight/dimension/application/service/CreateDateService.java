@@ -18,9 +18,12 @@ public class CreateDateService implements CreateDateUseCase {
 
     @Override
     @Transactional
-    public Long create(LocalDate date) {
-        Date createdDate = new Date().withDate(date);
-        createdDate.fillData();
-        return register.register(createdDate);
+    public Long create(LocalDate localDate) {
+        Date date = register.findByDate(localDate).orElse(null);
+        if (date != null) {
+            return date.getId();
+        }
+        Date created = Date.from(localDate);
+        return register.register(created);
     }
 }
