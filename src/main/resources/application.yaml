@@ -62,6 +62,20 @@ kafka:
         enable.auto.commit=false\
         auto.offset.reset=earliest
 
+    sprint-commands:
+      topic: sprint-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.SprintEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    story-commands:
+      topic: story-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.StoryEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
     user-commands:
       topic: user-commands
       properties: \

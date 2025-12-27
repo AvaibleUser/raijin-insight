@@ -32,6 +32,26 @@
       "description": "The properties to use in the Kafka consumer"
     },
     {
+      "name": "kafka.topics.sprint-commands.topic",
+      "type": "java.lang.String",
+      "description": "The name of the Kafka topic"
+    },
+    {
+      "name": "kafka.topics.sprint-commands.properties",
+      "type": "java.lang.String",
+      "description": "The properties to use in the Kafka consumer"
+    },
+    {
+      "name": "kafka.topics.story-commands.topic",
+      "type": "java.lang.String",
+      "description": "The name of the Kafka topic"
+    },
+    {
+      "name": "kafka.topics.story-commands.properties",
+      "type": "java.lang.String",
+      "description": "The properties to use in the Kafka consumer"
+    },
+    {
       "name": "kafka.topics.user-commands.topic",
       "type": "java.lang.String",
       "description": "The name of the Kafka topic"
