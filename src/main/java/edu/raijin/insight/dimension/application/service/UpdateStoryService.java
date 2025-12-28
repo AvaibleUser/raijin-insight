@@ -21,7 +21,7 @@ public class UpdateStoryService implements UpdateStoryUseCase {
     @Transactional
     public Story update(UUID storyId, Story story) {
         Story toUpdate = update.findById(storyId)
-                .orElseThrow(() -> new ValueNotFoundException("El empleado no se encuentra registrado"));
+                .orElseThrow(() -> new ValueNotFoundException("La historia no se encuentra registrada"));
 
         toUpdate.updateFrom(story);
         toUpdate.checkValidRegistration();
