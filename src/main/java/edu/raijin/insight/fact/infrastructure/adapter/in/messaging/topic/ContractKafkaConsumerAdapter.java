@@ -28,7 +28,7 @@ public class ContractKafkaConsumerAdapter {
     }
 
     @KafkaListener(topics = "${kafka.topics.contract-commands.topic}", properties = "${kafka.topics.contract-commands.properties}", groupId = "insight-service")
-    public void consumeEmployeeEventEvent(@Payload ContractEvent event, @Header(RECEIVED_KEY) String key) {
+    public void consumeContractEvent(@Payload ContractEvent event, @Header(RECEIVED_KEY) String key) {
         EmployeeEvent employeeEvent = mapper.toDomain(event);
         employeeEvent.setEventType(switch (event.getStatus()) {
             case TERMINATED -> EmployeeEventType.TERMINATION;

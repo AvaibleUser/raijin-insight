@@ -14,6 +14,7 @@ import edu.raijin.insight.fact.domain.model.EmployeeEvent;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ContractEventMapper {
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "employeeId", source = "event.employeeId")
     EmployeeEvent toDomain(ContractEvent event);
 }

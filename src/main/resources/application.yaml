@@ -12,6 +12,11 @@ logging:
         data:
           rest: debug
 
+      kafka:
+        clients:
+          producer: debug
+          consumer: debug
+
 spring:
   application:
     name: insight
@@ -86,7 +91,7 @@ kafka:
     member-commands:
       topic: member-commands
       properties: \
-        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.identity.UserEvent,\
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.MemberEvent,\
         enable.auto.commit=false\
         auto.offset.reset=earliest
 
@@ -94,5 +99,47 @@ kafka:
       topic: contract-commands
       properties: \
         spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.ContractEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    bonus-commands:
+      topic: bonus-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.BonusEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    discount-commands:
+      topic: discount-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.DiscountEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    expense-commands:
+      topic: expense-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.ExpenseEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    income-commands:
+      topic: income-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.IncomeEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    payroll-commands:
+      topic: payroll-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.PayrollEvent,\
+        enable.auto.commit=false\
+        auto.offset.reset=earliest
+
+    suspension-commands:
+      topic: suspension-commands
+      properties: \
+        spring.json.value.default.type=edu.raijin.commons.infrastructure.adapter.messaging.event.finance.SuspensionEvent,\
         enable.auto.commit=false\
         auto.offset.reset=earliest
