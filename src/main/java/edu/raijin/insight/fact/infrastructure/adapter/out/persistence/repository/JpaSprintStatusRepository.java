@@ -6,10 +6,10 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.entity.StoryActivityEntity;
+import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.entity.SprintStatusEntity;
 
 @Repository
-public interface JpaStoryActivityRepository extends JpaRepository<StoryActivityEntity, Long> {
+public interface JpaSprintStatusRepository extends JpaRepository<SprintStatusEntity, Long> {
 
-    Optional<StoryActivityEntity> findByStoryStoryId(UUID storyId);
+    Optional<SprintStatusEntity> findBySprintSprintId(UUID sprintId);
 }

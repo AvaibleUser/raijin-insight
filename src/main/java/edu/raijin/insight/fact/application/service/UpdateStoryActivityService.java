@@ -1,7 +1,5 @@
 package edu.raijin.insight.fact.application.service;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +25,9 @@ public class UpdateStoryActivityService implements UpdateStoryActivityUseCase {
 
         toUpdate.updateFrom(storyActivity);
         toUpdate.checkValidRegistration();
-        Long dateId = createDate.create(LocalDate.now());
+        Long fromDateId = createDate.create(storyActivity.getFromDate());
+        Long toDateId = createDate.create(storyActivity.getToDate());
 
-        return update.update(dateId, toUpdate);
+        return update.update(fromDateId, toDateId, toUpdate);
     }
 }

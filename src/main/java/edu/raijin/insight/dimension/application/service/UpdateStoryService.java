@@ -9,6 +9,7 @@ import edu.raijin.commons.util.exception.ValueNotFoundException;
 import edu.raijin.insight.dimension.domain.model.Story;
 import edu.raijin.insight.dimension.domain.port.persistence.UpdateStoryPort;
 import edu.raijin.insight.dimension.domain.usecase.UpdateStoryUseCase;
+import edu.raijin.insight.fact.domain.usecase.UpdateSprintStatusUseCase;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class UpdateStoryService implements UpdateStoryUseCase {
 
     private final UpdateStoryPort update;
+    private final UpdateSprintStatusUseCase updateStatus;
 
     @Override
     @Transactional
@@ -23,9 +25,11 @@ public class UpdateStoryService implements UpdateStoryUseCase {
         Story toUpdate = update.findById(storyId)
                 .orElseThrow(() -> new ValueNotFoundException("La historia no se encuentra registrada"));
 
+        updateStatus.updatePoints(story, toUpdate);
         toUpdate.updateFrom(story);
         toUpdate.checkValidRegistration();
-        return update.update(toUpdate);
+        Story updated = update.update(toUpdate);
+
+        return updated;
     }
 }
-

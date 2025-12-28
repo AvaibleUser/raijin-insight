@@ -2,6 +2,8 @@ package edu.raijin.insight.dimension.infrastructure.adapter.in.messaging.mapper;
 
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
+import java.time.LocalDate;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -18,6 +20,15 @@ public interface StoryEventMapper {
     @Mapping(target = "storyId", source = "id")
     Story toDomain(StoryEvent event);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "storyId", source = "id")
+    @Mapping(target = "toDate", source = "stage")
     StoryActivity toActivityDomain(StoryEvent event);
+
+    default LocalDate toLocalDate(String stage) {
+        return switch (stage) {
+            case "Finalizadas" -> LocalDate.now();
+            default -> null;
+        };
+    }
 }

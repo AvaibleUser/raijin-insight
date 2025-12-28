@@ -3,6 +3,7 @@ package edu.raijin.insight.fact.domain.model;
 import static edu.raijin.commons.util.exception.Exceptions.requireNonNull;
 import static lombok.AccessLevel.NONE;
 import static lombok.AccessLevel.PRIVATE;
+import static org.apache.commons.lang3.ObjectUtils.firstNonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -50,10 +51,10 @@ public class StoryActivity {
     }
 
     public void updateFrom(StoryActivity updated) {
-        this.sprintId = updated.getSprintId();
-        this.productOwnerId = updated.getProductOwnerId();
-        this.developerId = updated.getDeveloperId();
-        this.toDate = updated.getToDate();
-        this.hoursSpent = updated.getHoursSpent();
+        this.sprintId = firstNonNull(updated.sprintId, this.sprintId);
+        this.productOwnerId = firstNonNull(updated.productOwnerId, this.productOwnerId);
+        this.developerId = firstNonNull(updated.developerId, this.developerId);
+        this.toDate = firstNonNull(this.toDate, updated.toDate);
+        this.hoursSpent = firstNonNull(updated.hoursSpent, this.hoursSpent);
     }
 }

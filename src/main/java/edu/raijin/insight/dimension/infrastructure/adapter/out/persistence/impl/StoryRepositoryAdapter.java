@@ -23,9 +23,9 @@ public class StoryRepositoryAdapter implements RegisterStoryPort, UpdateStoryPor
     private final StoryEntityMapper mapper;
 
     @Override
-    public UUID register(Story story) {
+    public Story register(Story story) {
         StoriesEntity entity = mapper.toEntity(story);
-        return storyRepository.save(entity).getStoryId();
+        return mapper.toDomain(storyRepository.save(entity));
     }
 
     @Override
@@ -40,4 +40,3 @@ public class StoryRepositoryAdapter implements RegisterStoryPort, UpdateStoryPor
                 .map(mapper::toDomain);
     }
 }
-

@@ -6,5 +6,5 @@ import edu.raijin.insight.fact.domain.model.StoryActivity;
 @Port
 public interface RegisterStoryActivityPort {
 
-    Long register(Long dateId, StoryActivity storyActivity);
+    Long register(Long fromDateId, StoryActivity storyActivity);
 }

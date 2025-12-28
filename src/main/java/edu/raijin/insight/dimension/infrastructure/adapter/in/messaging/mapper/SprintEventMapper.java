@@ -9,6 +9,7 @@ import org.mapstruct.ReportingPolicy;
 import edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.SprintEvent;
 import edu.raijin.commons.util.annotation.Adapter;
 import edu.raijin.insight.dimension.domain.model.Sprint;
+import edu.raijin.insight.fact.domain.model.SprintStatus;
 
 @Adapter
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -16,5 +17,10 @@ public interface SprintEventMapper {
 
     @Mapping(target = "sprintId", source = "id")
     Sprint toDomain(SprintEvent event);
-}
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "sprintId", source = "id")
+    @Mapping(target = "fromDate", source = "startDate")
+    @Mapping(target = "toDate", source = "endDate")
+    SprintStatus toDomainStatus(SprintEvent event);
+}

@@ -12,12 +12,15 @@ import edu.raijin.commons.domain.type.StoryPriority;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 @Entity(name = "stories")
 @Table(name = "stories", schema = "dim")
@@ -30,6 +33,11 @@ public class StoriesEntity {
 
     @Id
     private UUID storyId;
+
+    @With
+    @ManyToOne
+    @JoinColumn(name = "sprint_id", nullable = true)
+    private SprintsEntity sprint;
 
     private String name;
 

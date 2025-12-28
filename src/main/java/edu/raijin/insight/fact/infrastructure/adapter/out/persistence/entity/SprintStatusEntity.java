@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.DatesEntity;
 import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.ProjectsEntity;
 import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.SprintsEntity;
-import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.StoriesEntity;
-import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.UsersEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,14 +21,14 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.With;
 
-@Entity(name = "story_activity")
-@Table(name = "story_activity", schema = "fact")
+@Entity(name = "sprint_status")
+@Table(name = "sprint_status", schema = "fact")
 @Data
 @Builder(toBuilder = true)
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
-public class StoryActivityEntity {
+public class SprintStatusEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -43,23 +41,8 @@ public class StoryActivityEntity {
 
     @With
     @ManyToOne
-    @JoinColumn(name = "story_id", nullable = false)
-    private StoriesEntity story;
-
-    @With
-    @ManyToOne
-    @JoinColumn(name = "sprint_id")
+    @JoinColumn(name = "sprint_id", nullable = false)
     private SprintsEntity sprint;
-
-    @With
-    @ManyToOne
-    @JoinColumn(name = "product_owner_id")
-    private UsersEntity productOwner;
-
-    @With
-    @ManyToOne
-    @JoinColumn(name = "developer_id")
-    private UsersEntity developer;
 
     @With
     @ManyToOne
@@ -72,8 +55,11 @@ public class StoryActivityEntity {
     private DatesEntity toDate;
 
     @Builder.Default
-    private BigDecimal hoursSpent = BigDecimal.ZERO;
+    private Integer pointsDone = 0;
 
     @Builder.Default
-    private Integer stageChanges = 0;
+    private Integer pointsPlanned = 0;
+
+    @Builder.Default
+    private BigDecimal percentDone = BigDecimal.ZERO;
 }

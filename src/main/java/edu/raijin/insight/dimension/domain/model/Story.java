@@ -26,6 +26,8 @@ import lombok.With;
 @AllArgsConstructor(access = PRIVATE)
 public class Story {
 
+    private static final String STAGE_DONE = "Finalizadas";
+
     private UUID storyId;
 
     private UUID projectId;
@@ -59,5 +61,9 @@ public class Story {
         this.stage = firstNonNull(updated.getStage(), this.getStage());
         this.points = firstNonNull(updated.getPoints(), this.getPoints());
         this.priority = firstNonNull(updated.getPriority(), this.getPriority());
+    }
+
+    public boolean isDone() {
+        return STAGE_DONE.equalsIgnoreCase(stage);
     }
 }

@@ -3,6 +3,7 @@ package edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.mapp
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import edu.raijin.commons.util.annotation.Adapter;
@@ -13,8 +14,9 @@ import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entit
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface StoryEntityMapper {
 
+    @Mapping(target = "sprintId", source = "sprint.sprintId")
     Story toDomain(StoriesEntity entity);
 
+    @Mapping(target = "sprint.sprintId", source = "sprintId")
     StoriesEntity toEntity(Story domain);
 }
-

@@ -11,5 +11,5 @@ public interface UpdateStoryActivityPort {
 
     Optional<StoryActivity> findByStoryId(UUID storyId);
 
-    StoryActivity update(Long dateId, StoryActivity storyActivity);
+    StoryActivity update(Long fromDateId, Long toDateId, StoryActivity storyActivity);
 }
