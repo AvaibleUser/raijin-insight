@@ -26,6 +26,9 @@ public interface SprintStatusEntityMapper {
     @Mapping(target = "sprintId", source = "sprint.sprintId")
     @Mapping(target = "fromDate", source = "fromDate.date")
     @Mapping(target = "toDate", source = "toDate.date")
+    @Mapping(target = "pointsDone", source = "pointsDone", defaultValue = "0")
+    @Mapping(target = "pointsPlanned", source = "pointsPlanned", defaultValue = "0")
+    @Mapping(target = "percentDone", source = "percentDone", defaultValue = "0")
     SprintStatus toDomain(SprintStatusEntity entity);
 
     @Mapping(target = "project.projectId", source = "domain.projectId")

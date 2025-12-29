@@ -21,6 +21,12 @@ public class FinancialMovementRepositoryAdapter implements RegisterFinancialMove
     @Override
     public Long register(Long eventId, FinancialMovement movement) {
         FinancialMovementsEntity entity = mapper.toEntity(eventId, movement);
+        if (entity.getProject().getProjectId() == null) {
+            entity.setProject(null);
+        }
+        if (entity.getEmployee().getUserId() == null) {
+            entity.setEmployee(null);
+        }
         return eventRepository.save(entity).getId();
     }
 }

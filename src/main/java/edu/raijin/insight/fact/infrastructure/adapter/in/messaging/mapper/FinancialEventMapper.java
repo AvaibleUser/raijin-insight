@@ -47,7 +47,7 @@ public interface FinancialEventMapper {
     @Mapping(target = "amount", expression = "java(event.getBaseSalary().negate())")
     @Mapping(target = "description", constant = "Pago del sueldo base")
     @Mapping(target = "transactionDate", source = "paymentDate")
-    @Mapping(target = "category", constant = "DISCOUNT")
+    @Mapping(target = "category", constant = "SALARY")
     FinancialMovement toDomain(PayrollEvent event);
 
     @Mapping(target = "id", ignore = true)
