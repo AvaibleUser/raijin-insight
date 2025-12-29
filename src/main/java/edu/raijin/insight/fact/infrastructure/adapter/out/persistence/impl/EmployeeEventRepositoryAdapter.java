@@ -15,7 +15,7 @@ import edu.raijin.commons.util.annotation.Adapter;
 import edu.raijin.insight.fact.domain.model.EmployeeEvent;
 import edu.raijin.insight.fact.domain.model.EmployeeReport;
 import edu.raijin.insight.fact.domain.model.Filter;
-import edu.raijin.insight.fact.domain.port.persistence.FindEmployeeEventPort;
+import edu.raijin.insight.fact.domain.port.persistence.FindEmployeeEventReportPort;
 import edu.raijin.insight.fact.domain.port.persistence.RegisterEmployeeEventPort;
 import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.entity.EmployeeEventsEntity;
 import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.mapper.EmployeeEventEntityMapper;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @Adapter
 @Component
 @RequiredArgsConstructor
-public class EmployeeEventRepositoryAdapter implements RegisterEmployeeEventPort, FindEmployeeEventPort {
+public class EmployeeEventRepositoryAdapter implements RegisterEmployeeEventPort, FindEmployeeEventReportPort {
 
     private final JpaEmployeeEventRepository eventRepository;
     private final EmployeeEventEntityMapper mapper;
@@ -37,7 +37,7 @@ public class EmployeeEventRepositoryAdapter implements RegisterEmployeeEventPort
     }
 
     @Override
-    public Paged<EmployeeReport> find(Filter<EmployeeEvent> filter, Pageable pageable) {
+    public Paged<EmployeeReport> findEventsReport(Filter<EmployeeEvent> filter, Pageable pageable) {
         Specification<EmployeeEventsEntity> spec = byEventDateFrom(filter.getFrom())
                 .and(byEventDateTo(filter.getTo()))
                 .and(byEventType(filter.getFilter().getEventType()))

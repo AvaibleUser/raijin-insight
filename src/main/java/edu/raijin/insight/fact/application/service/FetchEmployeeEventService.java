@@ -7,18 +7,18 @@ import edu.raijin.commons.domain.model.Paged;
 import edu.raijin.insight.fact.domain.model.EmployeeEvent;
 import edu.raijin.insight.fact.domain.model.EmployeeReport;
 import edu.raijin.insight.fact.domain.model.Filter;
-import edu.raijin.insight.fact.domain.port.persistence.FindEmployeeEventPort;
-import edu.raijin.insight.fact.domain.usecase.FetchEmployeeEventUseCase;
+import edu.raijin.insight.fact.domain.port.persistence.FindEmployeeEventReportPort;
+import edu.raijin.insight.fact.domain.usecase.FetchEmployeeEventReportUseCase;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class FetchEmployeeEventService implements FetchEmployeeEventUseCase {
+public class FetchEmployeeEventService implements FetchEmployeeEventReportUseCase {
 
-    private final FindEmployeeEventPort find;
+    private final FindEmployeeEventReportPort find;
 
     @Override
-    public Paged<EmployeeReport> fetch(Filter<EmployeeEvent> filter, Pageable pageable) {
-        return find.find(filter, pageable);
+    public Paged<EmployeeReport> fetchEventsReport(Filter<EmployeeEvent> filter, Pageable pageable) {
+        return find.findEventsReport(filter, pageable);
     }
 }

@@ -9,7 +9,7 @@ import edu.raijin.insight.fact.domain.model.EmployeeReport;
 import edu.raijin.insight.fact.domain.model.Filter;
 
 @UseCase
-public interface FetchEmployeeEventUseCase {
+public interface FetchEmployeeEventReportUseCase {
 
-    Paged<EmployeeReport> fetch(Filter<EmployeeEvent> filter, Pageable pageable);
+    Paged<EmployeeReport> fetchEventsReport(Filter<EmployeeEvent> filter, Pageable pageable);
 }

@@ -9,7 +9,7 @@ import edu.raijin.insight.fact.domain.model.EmployeeReport;
 import edu.raijin.insight.fact.domain.model.Filter;
 
 @Port
-public interface FindEmployeeEventPort {
+public interface FindEmployeeEventReportPort {
 
-    Paged<EmployeeReport> find(Filter<EmployeeEvent> filter, Pageable pageable);
+    Paged<EmployeeReport> findEventsReport(Filter<EmployeeEvent> filter, Pageable pageable);
 }
