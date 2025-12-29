@@ -6,24 +6,24 @@ COPY commons ./commons
 
 RUN gradle publishToMavenLocal -x test --no-daemon -p commons
 
-COPY finance/build.gradle.kts finance/settings.gradle.kts ./
+COPY insight/build.gradle.kts insight/settings.gradle.kts ./
 
 RUN gradle dependencies --no-daemon
 
-COPY finance/src ./src
+COPY insight/src ./src
 
 RUN gradle clean build -x test --no-daemon
 
-RUN cp build/libs/finance-0.0.1-SNAPSHOT.jar finance.jar
+RUN cp build/libs/insight-0.0.1-SNAPSHOT.jar insight.jar
 
-RUN jar xf finance.jar
+RUN jar xf insight.jar
 
 RUN jdeps --ignore-missing-deps -q \
     --recursive \
     --multi-release 21 \
     --print-module-deps \
     --class-path 'BOOT-INF/lib/*' \
-    finance.jar > deps.info
+    insight.jar > deps.info
 
 FROM eclipse-temurin:21-jdk-noble AS jre-builder
 
@@ -56,10 +56,10 @@ RUN chown -R $OWNER:$OWNER /app
 
 COPY --from=jre-builder /jdk-21 $JAVA_HOME
 
-COPY --from=builder --chown=$OWNER:$OWNER /app/finance.jar .
+COPY --from=builder --chown=$OWNER:$OWNER /app/insight.jar .
 
 USER $OWNER
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "finance.jar"]
+ENTRYPOINT ["java", "-jar", "insight.jar"]

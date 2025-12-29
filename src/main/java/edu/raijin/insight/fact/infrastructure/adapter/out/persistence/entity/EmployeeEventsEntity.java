@@ -48,4 +48,6 @@ public class EmployeeEventsEntity {
     @Enumerated(STRING)
     @Column(nullable = false)
     private EmployeeEventType eventType;
+
+    private String role;
 }

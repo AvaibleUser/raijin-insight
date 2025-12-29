@@ -33,16 +33,11 @@ public class EmployeeEvent {
 
     private EmployeeEventType eventType;
 
+    private String role;
+
     public void checkValidRegistration() {
         requireNonNull(employeeId, () -> new BadRequestException("El empleado es requerido"));
         requireNonNull(eventType, () -> new BadRequestException("El tipo de evento es requerido"));
-    }
-
-    public static EmployeeEvent from(UUID employeeId, EmployeeEventType eventType) {
-        return EmployeeEvent.builder()
-                .employeeId(employeeId)
-                .eventType(eventType)
-                .build();
     }
 
     public void setEventType(EmployeeEventType eventType) {
