@@ -2,6 +2,7 @@ package edu.raijin.insight.fact.application.service;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.raijin.commons.domain.model.Paged;
 import edu.raijin.insight.fact.domain.model.EmployeeEvent;
@@ -18,6 +19,7 @@ public class FetchEmployeeEventService implements FetchEmployeeEventReportUseCas
     private final FindEmployeeEventReportPort find;
 
     @Override
+    @Transactional
     public Paged<EmployeeReport> fetchEventsReport(Filter<EmployeeEvent> filter, Pageable pageable) {
         return find.findEventsReport(filter, pageable);
     }
