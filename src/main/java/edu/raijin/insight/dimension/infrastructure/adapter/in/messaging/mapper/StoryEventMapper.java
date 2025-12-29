@@ -27,7 +27,7 @@ public interface StoryEventMapper {
 
     default LocalDate toLocalDate(String stage) {
         return switch (stage) {
-            case "Finalizadas" -> LocalDate.now();
+            case Story.STAGE_DONE -> LocalDate.now();
             default -> null;
         };
     }

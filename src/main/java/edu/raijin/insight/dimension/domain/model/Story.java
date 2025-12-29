@@ -26,7 +26,7 @@ import lombok.With;
 @AllArgsConstructor(access = PRIVATE)
 public class Story {
 
-    private static final String STAGE_DONE = "Finalizadas";
+    public static final String STAGE_DONE = "Finalizadas";
 
     private UUID storyId;
 

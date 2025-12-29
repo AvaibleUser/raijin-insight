@@ -10,6 +10,7 @@ import org.mapstruct.ReportingPolicy;
 
 import edu.raijin.commons.util.annotation.Adapter;
 import edu.raijin.insight.dimension.infrastructure.adapter.out.persistence.entity.DatesEntity;
+import edu.raijin.insight.fact.domain.model.EmployeeProductivityReport;
 import edu.raijin.insight.fact.domain.model.StoryActivity;
 import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.entity.StoryActivityEntity;
 
@@ -23,6 +24,8 @@ public interface StoryActivityEntityMapper {
     @Mapping(target = "toDate", ignore = true)
     @Mapping(target = "fromDate.id", source = "fromDateId")
     StoryActivityEntity toEntity(Long fromDateId, StoryActivity domain);
+
+    EmployeeProductivityReport toReport(StoryActivityEntity entity);
 
     @Mapping(target = "fromDate", ignore = true)
     @Mapping(target = "toDate", ignore = true)
