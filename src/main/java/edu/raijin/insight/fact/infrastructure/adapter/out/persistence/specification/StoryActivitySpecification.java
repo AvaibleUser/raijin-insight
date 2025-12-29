@@ -1,5 +1,7 @@
 package edu.raijin.insight.fact.infrastructure.adapter.out.persistence.specification;
 
+import static jakarta.persistence.criteria.JoinType.LEFT;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -50,19 +52,19 @@ public interface StoryActivitySpecification {
         if (productOwnerId == null) {
             return PredicateSpecification.unrestricted();
         }
-        return (from, builder) -> builder.equal(from.get("productOwner").get("userId"), productOwnerId);
+        return (from, builder) -> builder.equal(from.join("productOwner", LEFT).get("userId"), productOwnerId);
     }
 
     static PredicateSpecification<StoryActivityEntity> byDeveloper(UUID developerId) {
         if (developerId == null) {
             return PredicateSpecification.unrestricted();
         }
-        return (from, builder) -> builder.equal(from.get("developer").get("userId"), developerId);
+        return (from, builder) -> builder.equal(from.join("developer", LEFT).get("userId"), developerId);
     }
 
     static Specification<StoryActivityEntity> orderByDeveloper() {
         return (root, query, builder) -> query
-                .orderBy(builder.asc(root.get("developer").get("userId")))
+                .orderBy(builder.asc(root.join("developer", LEFT).get("userId")))
                 .getRestriction();
     }
 }
