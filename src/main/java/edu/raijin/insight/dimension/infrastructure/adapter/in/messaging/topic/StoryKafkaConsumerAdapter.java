@@ -39,7 +39,7 @@ public class StoryKafkaConsumerAdapter {
         updateActivity.update(activity);
     }
 
-    @KafkaListener(topics = "${kafka.topics.story-commands.topic}", properties = "${kafka.topics.story-commands.properties}", groupId = "insight-service")
+    @KafkaListener(topics = "${kafka.topics.story-commands.topic}", properties = "${kafka.topics.story-commands.properties}", groupId = "insight-service-story")
     public void consumeStoryEvent(@Payload StoryEvent event, @Header(RECEIVED_KEY) String key) {
         Story story = mapper.toDomain(event);
         StoryActivity activity = mapper.toActivityDomain(event);

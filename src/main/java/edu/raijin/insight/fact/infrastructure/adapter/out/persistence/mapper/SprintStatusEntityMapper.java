@@ -22,8 +22,14 @@ import edu.raijin.insight.fact.infrastructure.adapter.out.persistence.entity.Spr
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = IGNORE, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface SprintStatusEntityMapper {
 
+    @Mapping(target = "projectId", source = "project.projectId")
+    @Mapping(target = "sprintId", source = "sprint.sprintId")
+    @Mapping(target = "fromDate", source = "fromDate.date")
+    @Mapping(target = "toDate", source = "toDate.date")
     SprintStatus toDomain(SprintStatusEntity entity);
 
+    @Mapping(target = "project.projectId", source = "domain.projectId")
+    @Mapping(target = "sprint.sprintId", source = "domain.sprintId")
     @Mapping(target = "fromDate", ignore = true)
     @Mapping(target = "toDate", ignore = true)
     @Mapping(target = "fromDate.id", source = "fromDateId")

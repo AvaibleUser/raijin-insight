@@ -25,7 +25,7 @@ public class UpdateStoryActivityService implements UpdateStoryActivityUseCase {
 
         toUpdate.updateFrom(storyActivity);
         toUpdate.checkValidRegistration();
-        Long fromDateId = createDate.create(storyActivity.getFromDate());
+        Long fromDateId = createDate.create(toUpdate.getFromDate());
         Long toDateId = createDate.create(storyActivity.getToDate());
 
         return update.update(fromDateId, toDateId, toUpdate);
