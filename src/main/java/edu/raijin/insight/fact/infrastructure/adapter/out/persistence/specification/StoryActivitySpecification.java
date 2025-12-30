@@ -52,19 +52,23 @@ public interface StoryActivitySpecification {
         if (productOwnerId == null) {
             return PredicateSpecification.unrestricted();
         }
-        return (from, builder) -> builder.equal(from.join("productOwner", LEFT).get("userId"), productOwnerId);
+        return (from, builder) -> builder.equal(from.join("productOwner").get("userId"), productOwnerId);
     }
 
     static PredicateSpecification<StoryActivityEntity> byDeveloper(UUID developerId) {
         if (developerId == null) {
             return PredicateSpecification.unrestricted();
         }
-        return (from, builder) -> builder.equal(from.join("developer", LEFT).get("userId"), developerId);
+        return (from, builder) -> builder.equal(from.join("developer").get("userId"), developerId);
     }
 
     static Specification<StoryActivityEntity> orderByDeveloper() {
-        return (root, query, builder) -> query
-                .orderBy(builder.asc(root.join("developer", LEFT).get("userId")))
-                .getRestriction();
+        return (root, query, builder) -> {
+            Path<Object> developer = root.join("developer", LEFT).get("userId");
+            return query
+                    .orderBy(builder.asc(developer))
+                    .groupBy(root.get("id"), developer)
+                    .getRestriction();
+        };
     }
 }
