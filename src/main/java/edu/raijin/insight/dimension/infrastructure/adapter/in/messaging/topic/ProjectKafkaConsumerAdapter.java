@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.ProjectEvent;
 import edu.raijin.commons.util.annotation.Adapter;
+import edu.raijin.insight.audit.domain.model.Snapshot;
+import edu.raijin.insight.audit.domain.usecase.CreateSnapshotUseCase;
+import edu.raijin.insight.audit.infrastructure.adapter.in.messaging.mapper.SnapshotEventMapper;
 import edu.raijin.insight.dimension.domain.model.Project;
 import edu.raijin.insight.dimension.domain.usecase.CreateProjectUseCase;
 import edu.raijin.insight.dimension.domain.usecase.UpdateProjectUseCase;
@@ -23,6 +26,8 @@ public class ProjectKafkaConsumerAdapter {
     private final CreateProjectUseCase create;
     private final UpdateProjectUseCase update;
     private final ProjectEventMapper mapper;
+    private final CreateSnapshotUseCase createSnapshot;
+    private final SnapshotEventMapper snapshotMapper;
 
     private void consumeCreatedProject(Project project) {
         create.create(project);
@@ -40,5 +45,7 @@ public class ProjectKafkaConsumerAdapter {
             case "update" -> consumeUpdatedProject(project);
             case "delete" -> consumeUpdatedProject(project);
         }
+        Snapshot snapshot = snapshotMapper.toDomain(event);
+        createSnapshot.create(snapshot);
     }
 }

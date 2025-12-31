@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.StoryEvent;
 import edu.raijin.commons.util.annotation.Adapter;
+import edu.raijin.insight.audit.domain.model.Snapshot;
+import edu.raijin.insight.audit.domain.usecase.CreateSnapshotUseCase;
+import edu.raijin.insight.audit.infrastructure.adapter.in.messaging.mapper.SnapshotEventMapper;
 import edu.raijin.insight.dimension.domain.model.Story;
 import edu.raijin.insight.dimension.domain.usecase.CreateStoryUseCase;
 import edu.raijin.insight.dimension.domain.usecase.UpdateStoryUseCase;
@@ -28,6 +31,8 @@ public class StoryKafkaConsumerAdapter {
     private final UpdateStoryUseCase update;
     private final UpdateStoryActivityUseCase updateActivity;
     private final StoryEventMapper mapper;
+    private final CreateSnapshotUseCase createSnapshot;
+    private final SnapshotEventMapper snapshotMapper;
 
     private void consumeCreatedStory(Story story, StoryActivity activity) {
         create.create(story);
@@ -48,5 +53,7 @@ public class StoryKafkaConsumerAdapter {
             case "update" -> consumeUpdatedStory(story, activity);
             case "delete" -> consumeUpdatedStory(story, activity);
         }
+        Snapshot snapshot = snapshotMapper.toDomain(event);
+        createSnapshot.create(snapshot);
     }
 }

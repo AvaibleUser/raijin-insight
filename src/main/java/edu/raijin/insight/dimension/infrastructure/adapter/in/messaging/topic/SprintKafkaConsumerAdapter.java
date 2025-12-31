@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import edu.raijin.commons.infrastructure.adapter.messaging.event.scrum.SprintEvent;
 import edu.raijin.commons.util.annotation.Adapter;
+import edu.raijin.insight.audit.domain.model.Snapshot;
+import edu.raijin.insight.audit.domain.usecase.CreateSnapshotUseCase;
+import edu.raijin.insight.audit.infrastructure.adapter.in.messaging.mapper.SnapshotEventMapper;
 import edu.raijin.insight.dimension.domain.model.Sprint;
 import edu.raijin.insight.dimension.domain.usecase.CreateSprintUseCase;
 import edu.raijin.insight.dimension.domain.usecase.UpdateSprintUseCase;
@@ -28,6 +31,8 @@ public class SprintKafkaConsumerAdapter {
     private final CreateSprintStatusUseCase createStatus;
     private final UpdateSprintStatusUseCase updateStatus;
     private final SprintEventMapper mapper;
+    private final CreateSnapshotUseCase createSnapshot;
+    private final SnapshotEventMapper snapshotMapper;
 
     private void consumeCreatedSprint(Sprint sprint, SprintStatus status) {
         create.create(sprint);
@@ -48,5 +53,7 @@ public class SprintKafkaConsumerAdapter {
             case "update" -> consumeUpdatedSprint(sprint, status);
             case "delete" -> consumeUpdatedSprint(sprint, status);
         }
+        Snapshot snapshot = snapshotMapper.toDomain(event);
+        createSnapshot.create(snapshot);
     }
 }
