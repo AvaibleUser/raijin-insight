@@ -15,6 +15,9 @@ import edu.raijin.insight.audit.infrastructure.adapter.out.persistence.entity.Sn
 public interface SnapshotEntityMapper {
 
     @Mapping(target = "actorId", source = "actor.userId")
+    @Mapping(target = "fullName", source = "actor.fullName")
+    @Mapping(target = "email", source = "actor.email")
+    @Mapping(target = "role", source = "actor.role")
     Snapshot toDomain(SnapshotsEntity entity);
 
     @Mapping(target = "actor.userId", source = "actorId")

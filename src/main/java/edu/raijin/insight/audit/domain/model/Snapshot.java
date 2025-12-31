@@ -30,6 +30,12 @@ public class Snapshot {
 
     private UUID actorId;
 
+    private String fullName;
+
+    private String email;
+
+    private String role;
+
     @Builder.Default
     private Instant occurredAt = Instant.now();
 
